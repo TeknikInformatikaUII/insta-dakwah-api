@@ -23,6 +23,10 @@ $app = new Laravel\Lumen\Application(
     realpath(__DIR__.'/../')
 );
 
+$app->configure('app');
+$app->configure('auth');
+$app->configure('secrets');
+
 $app->withFacades();
 $app->withEloquent();
 
@@ -47,6 +51,12 @@ $app->singleton(
     App\Console\Kernel::class
 );
 
+$app->singleton('cookie', function () use ($app) {
+    return $app->loadComponent('session', 'Illuminate\Cookie\CookieServiceProvider', 'cookie');
+});
+
+$app->bind('Illuminate\Contracts\Cookie\QueueingFactory', 'cookie');
+
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
@@ -58,9 +68,9 @@ $app->singleton(
 |
 */
 
-// $app->middleware([
-//    App\Http\Middleware\ExampleMiddleware::class
-// ]);
+$app->middleware([
+    Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+]);
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
