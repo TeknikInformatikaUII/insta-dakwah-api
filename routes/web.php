@@ -14,3 +14,7 @@
 $app->get('/', function () use ($app) {
     return $app->version();
 });
+
+$app->post('login', 'LoginController@login');
+
+$app->post('refresh-token', 'LoginController@refreshToken');

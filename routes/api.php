@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Http\Request;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -11,10 +13,10 @@
 |
 */
 
-$app->get('/', function () use ($app) {
-    return $app->version();
+$app->get('/user', function (Request $request) use ($app) {
+    return response()->json($request->user());
 });
 
 $app->get('/users', function () use ($app) {
-    return response()->json(\App\User::all());
+    return response()->json(App\User::all());
 });
