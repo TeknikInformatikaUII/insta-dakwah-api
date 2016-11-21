@@ -12,8 +12,21 @@
 */
 
 $factory->define(App\User::class, function (Faker\Generator $faker) {
+    static $password;
+
     return [
         'name' => $faker->name,
-        'email' => $faker->email,
+        'email' => $faker->unique()->safeEmail,
+        'password' => $password ?: $password = bcrypt('secret'),
+        'user_status_id' => App\UserStatus::all()->random()->id
+    ];
+});
+
+$factory->define(App\UserStatus::class, function (Faker\Generator $faker) {
+    $name = $faker->unique()->word;
+
+    return [
+        'name' => $name,
+        'slug' => str_slug($name, '-'),
     ];
 });
