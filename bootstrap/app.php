@@ -94,8 +94,18 @@ $app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
 |
 */
 
-$app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
-    require __DIR__.'/../app/Http/routes.php';
+$app->group([
+    'namespace' => 'App\Http\Controllers',
+], function ($app) {
+    require base_path('routes/web.php');
+});
+
+$app->group([
+    'middleware' => 'auth:api',
+    'namespace' => 'App\Http\Controllers',
+    'prefix' => 'api',
+], function ($app) {
+    require base_path('routes/api.php');
 });
 
 return $app;
