@@ -14,10 +14,10 @@ InstaDakwah API is app that used for manage resource used by InstaDakwah Android
 7. Run `php artisan migrate --seed`
 8. Run `php artisan passport:install`
 9. Copy the output value from `Password grant client` to your `.env`, like:
-```
-APP_CLIENT_ID=2
-APP_CLIENT_SECRET=eRlUMINSSgmqXOUUJIISDQPFpfGODLiPTJ6wUKXQ
-```
+    ```
+    APP_CLIENT_ID=2
+    APP_CLIENT_SECRET=eRlUMINSSgmqXOUUJIISDQPFpfGODLiPTJ6wUKXQ
+    ```
 10. To run the application, issue this command `php artisan serve`. By default it's use port 8000. If you like to use different port, just specify the port as an argument, like `php artisan serve --port=9000`
 
 ## Security Vulnerabilities
