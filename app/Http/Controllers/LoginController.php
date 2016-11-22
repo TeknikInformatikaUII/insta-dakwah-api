@@ -40,7 +40,7 @@ class LoginController extends Controller
         $request = app()->make('request');
 
         return $this->access('refresh_token', [
-            'refresh_token' => $crypt->decrypt($request->cookie('refreshToken'))
+            'refresh_token' => $crypt->decrypt($request->cookie('refresh_token'))
         ]);
     }
 
@@ -80,7 +80,7 @@ class LoginController extends Controller
             $encryptedToken = $crypt->encrypt($response->refresh_token);
 
             // Set the refresh token as an encrypted HttpOnly cookie
-            $cookie->queue('refreshToken',
+            $cookie->queue('refresh_token',
                 $encryptedToken,
                 604800, // expiration, should be moved to a config file
                 null,
@@ -92,9 +92,9 @@ class LoginController extends Controller
             $this->accessToken = $response->access_token;
 
             $response = [
-                'accessToken'            => $response->access_token,
-                'tokenType'              => $response->token_type,
-                'accessTokenExpiration'  => $response->expires_in
+                'token_type'    => $response->token_type,
+                'expires_in'    => $response->expires_in,
+                'access_token'   => $response->access_token,
             ];
         }
 
