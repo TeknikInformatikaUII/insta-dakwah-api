@@ -24,7 +24,7 @@ InstaDakwah API is app that used for manage resource used by InstaDakwah Android
 ## Example
 The example how to access the API you can see here:
 
-[![Example](http://img.youtube.com/vi/TWvWZvobpO0/0.jpg)](http://www.youtube.com/watch?v=YTWvWZvobpO0 "Example")
+[![Example](http://img.youtube.com/vi/TWvWZvobpO0/0.jpg)](http://www.youtube.com/watch?v=TWvWZvobpO0 "Example")
 
 ## Security Vulnerabilities
 
