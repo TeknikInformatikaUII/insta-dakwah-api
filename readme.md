@@ -21,6 +21,10 @@ InstaDakwah API is app that used for manage resource used by InstaDakwah Android
     ```
 10. To run the application, issue this command `php artisan serve`. By default it's use port 8000. If you like to use different port, just specify the port as an argument, like `php artisan serve --port=9000`
 
+## Example
+The example how to access the API you can see here:
+[![Example](http://img.youtube.com/vi/TWvWZvobpO0/0.jpg)](http://www.youtube.com/watch?v=YTWvWZvobpO0 "Example")
+
 ## Security Vulnerabilities
 
 If you discover a security vulnerability within this API, please send an e-mail to informatics.uii.club@gmail.com. All security vulnerabilities will be promptly addressed.
