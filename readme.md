@@ -4,16 +4,12 @@ InstaDakwah API is app that used for manage resource used by InstaDakwah Android
 
 ## How to Use
 1. Clone this repository
-```
-git clone git@github.com:TeknikInformatikaUII/insta-dakwah-api.git
-```
+`git clone git@github.com:TeknikInformatikaUII/insta-dakwah-api.git`
 2. Cd into that directory
 3. Run `composer install`
 4. Duplicate `.env.example` to `.env`
 5. Provide the `APP_KEY` value with some random string, like:
-```
-base64:8Y6coT87VMVS5lfWa9ZwbgpWH5YcKhWgzkR/YiJZCNs=
-```
+`base64:8Y6coT87VMVS5lfWa9ZwbgpWH5YcKhWgzkR/YiJZCNs=`
 6. Set the database settings according to your system's database.
 7. Run `php artisan migrate --seed`
 8. Run `php artisan passport:install`
