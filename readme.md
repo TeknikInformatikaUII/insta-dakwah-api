@@ -14,6 +14,7 @@ InstaDakwah API is app that used for manage resource used by InstaDakwah Android
 7. Run `php artisan migrate --seed`
 8. Run `php artisan passport:install`
 9. Copy the output value from `Password grant client` to your `.env`, like:
+
     ```
     APP_CLIENT_ID=2
     APP_CLIENT_SECRET=eRlUMINSSgmqXOUUJIISDQPFpfGODLiPTJ6wUKXQ
