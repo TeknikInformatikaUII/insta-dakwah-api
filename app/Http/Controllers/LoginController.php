@@ -89,8 +89,6 @@ class LoginController extends Controller
                 true // HttpOnly
             );
 
-            $this->accessToken = $response->access_token;
-
             $response = [
                 'token_type'    => $response->token_type,
                 'expires_in'    => $response->expires_in,
