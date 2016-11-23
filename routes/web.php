@@ -12,9 +12,13 @@
 */
 
 $app->get('/', function () use ($app) {
-    return $app->version();
+    $contents = [
+        'message' => 'You need to contact informatics.uii.club@gmail.com if you wan\'t to use the API',
+    ];
+
+    return response()->json($contents);
 });
 
-$app->post('login', 'LoginController@login');
 
+$app->post('login', 'LoginController@login');
 $app->post('refresh-token', 'LoginController@refreshToken');
