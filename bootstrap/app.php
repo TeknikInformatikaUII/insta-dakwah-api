@@ -23,12 +23,12 @@ $app = new Laravel\Lumen\Application(
     realpath(__DIR__.'/../')
 );
 
+$app->withFacades();
+$app->withEloquent();
+
 $app->configure('app');
 $app->configure('auth');
 $app->configure('secrets');
-
-$app->withFacades();
-$app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
