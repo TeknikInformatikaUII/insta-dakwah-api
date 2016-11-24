@@ -29,6 +29,19 @@ $app->withEloquent();
 $app->configure('app');
 $app->configure('auth');
 $app->configure('secrets');
+$app->configure('filesystems');
+
+
+/*
+|--------------------------------------------------------------------------
+| Register Class Aliases
+|--------------------------------------------------------------------------
+|
+| Now we will register a few class aliases.
+|
+*/
+
+class_alias('Illuminate\Support\Facades\Storage', 'Storage');
 
 /*
 |--------------------------------------------------------------------------
@@ -51,11 +64,10 @@ $app->singleton(
     App\Console\Kernel::class
 );
 
-$app->singleton('cookie', function () use ($app) {
-    return $app->loadComponent('session', 'Illuminate\Cookie\CookieServiceProvider', 'cookie');
-});
-
-$app->bind('Illuminate\Contracts\Cookie\QueueingFactory', 'cookie');
+$app->singleton(
+    Illuminate\Contracts\Cookie\QueueingFactory::class,
+    'cookie'
+);
 
 /*
 |--------------------------------------------------------------------------
@@ -92,6 +104,8 @@ $app->routeMiddleware([
 // $app->register(App\Providers\EventServiceProvider::class);
 $app->register(Laravel\Passport\PassportServiceProvider::class);
 $app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
+$app->register(Illuminate\Filesystem\FilesystemServiceProvider::class);
+$app->register(Illuminate\Cookie\CookieServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
