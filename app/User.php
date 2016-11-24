@@ -41,6 +41,20 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     ];
 
     /**
+     * The attributes rules.
+     *
+     * @var array
+     */
+    public static $rules = [
+        'name' => 'required',
+        'email' => 'required',
+        'address' => 'required',
+        'phone' => 'required',
+        'photo_url' => 'required',
+        'biography' => 'required',
+    ];
+
+    /**
      * Get all users following us.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
