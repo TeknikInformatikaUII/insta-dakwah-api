@@ -41,7 +41,7 @@ $app->configure('filesystems');
 |
 */
 
-class_alias('Illuminate\Support\Facades\Storage', 'Storage');
+class_alias(Illuminate\Support\Facades\Storage::class, 'Storage');
 
 /*
 |--------------------------------------------------------------------------
