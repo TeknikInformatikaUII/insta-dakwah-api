@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "91458d2bfddc18722c6438ca3da1c58b",
-    "content-hash": "08fe6fd6505c4b5f64de35bcfdea7dea",
+    "hash": "f1678fd0474f6a711a01f68373a39710",
+    "content-hash": "ce18ea1aecfad3ea2fe6657f46726315",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -2338,6 +2338,64 @@
                 "psr-3"
             ],
             "time": "2016-10-10 12:19:37"
+        },
+        {
+            "name": "silber/bouncer",
+            "version": "v1.0.0-alpha.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/JosephSilber/bouncer.git",
+                "reference": "5c35fda0597375b5f204f8c7a252f3f21aa0b3fe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JosephSilber/bouncer/zipball/5c35fda0597375b5f204f8c7a252f3f21aa0b3fe",
+                "reference": "5c35fda0597375b5f204f8c7a252f3f21aa0b3fe",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/auth": "~5.1.20|5.2.*|5.3.*",
+                "illuminate/container": "~5.1.20|5.2.*|5.3.*",
+                "illuminate/contracts": "~5.1.20|5.2.*|5.3.*",
+                "illuminate/database": "~5.1.20|5.2.*|5.3.*"
+            },
+            "require-dev": {
+                "illuminate/cache": "~5.1.20|5.2.*|5.3.*",
+                "illuminate/console": "~5.1.20|5.2.*|5.3.*",
+                "mockery/mockery": "^0.9.5",
+                "phpunit/phpunit": "^4.8"
+            },
+            "suggest": {
+                "illuminate/cache": "Allows caching the bouncer's database queries",
+                "illuminate/console": "Allows running registered bouncer seeders via artisan"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Silber\\Bouncer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Joseph Silber",
+                    "email": "contact@josephsilber.com"
+                }
+            ],
+            "description": "Bouncer handles roles and abilities for Laravel's ACL.",
+            "keywords": [
+                "abilities",
+                "acl",
+                "capabilities",
+                "eloquent",
+                "laravel",
+                "permissions",
+                "roles"
+            ],
+            "time": "2016-09-21 01:19:05"
         },
         {
             "name": "symfony/console",
