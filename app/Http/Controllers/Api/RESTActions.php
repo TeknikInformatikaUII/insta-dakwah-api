@@ -13,7 +13,7 @@ trait RESTActions
     {
         $m = self::MODEL;
 
-        return $this->response(Response::HTTP_OK, $m::all());
+        return $this->ok($m::all());
     }
 
     public function get($id)
@@ -23,10 +23,10 @@ trait RESTActions
         $model = $m::find($id);
 
         if (is_null($model)) {
-            return $this->response(Response::HTTP_NOT_FOUND);
+            return $this->modelNotFound();
         }
 
-        return $this->response(Response::HTTP_OK, $model);
+        return $this->ok($model);
     }
 
     public function store(Request $request)
@@ -37,7 +37,7 @@ trait RESTActions
             $this->validate($request, $m::$rules);
         }
 
-        return $this->response(Response::HTTP_CREATED, $m::create($request->all()));
+        return $this->ok($m::create($request->all()));
     }
 
     public function update(Request $request, $id)
@@ -51,12 +51,12 @@ trait RESTActions
         $model = $m::find($id);
 
         if (is_null($model)) {
-            return $this->response(Response::HTTP_NOT_FOUND);
+            return $this->modelNotFound();
         }
 
         $model->update($request->all());
 
-        return $this->response(Response::HTTP_OK, $model);
+        return $this->ok($model);
     }
 
     public function destroy($id)
@@ -64,11 +64,11 @@ trait RESTActions
         $m = self::MODEL;
 
         if (is_null($m::find($id))) {
-            return $this->response(Response::HTTP_NOT_FOUND);
+            return $this->modelNotFound();
         }
 
         $m::destroy($id);
 
-        return $this->response(Response::HTTP_NO_CONTENT);
+        return $this->modelDeleted();
     }
 }

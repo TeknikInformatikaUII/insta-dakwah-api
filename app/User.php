@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Storage;
 use Illuminate\Auth\Authenticatable;
 use Laravel\Lumen\Auth\Authorizable;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +14,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 {
     use Authenticatable,
         Authorizable,
-        HasApiTokens;
+        HasApiTokens,
+        Reportable;
 
     /**
      * The attributes that are mass assignable.
@@ -38,20 +40,6 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $hidden = [
         'activation_key',
         'password',
-    ];
-
-    /**
-     * The attributes rules.
-     *
-     * @var array
-     */
-    public static $rules = [
-        'name' => 'required',
-        'email' => 'required',
-        'address' => 'required',
-        'phone' => 'required',
-        'photo_url' => 'required',
-        'biography' => 'required',
     ];
 
     /**
@@ -81,7 +69,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     public function isActive()
     {
-        return $this->user_status_id === 1;
+        return $this->user_status_id === UserStatus::ACTIVE;
     }
 
     /**
@@ -91,7 +79,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     public function isBanned()
     {
-        return $this->user_status_id === 2;
+        return $this->user_status_id === UserStatus::BANNED;
     }
 
     /**
@@ -103,7 +91,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function getPhotoUrlAttribute($value)
     {
         return $value ?
-            storage_path($value) :
+            Storage::url($value) :
             url('images/profile/user-default.png');
     }
 }

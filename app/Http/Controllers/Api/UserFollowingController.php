@@ -6,12 +6,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 
-class UserFollowerController extends Controller
+class UserFollowingController extends Controller
 {
     use ApiResponse;
 
     /**
-     * Display a listing of the user followers.
+     * Display a listing of the user we are following.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -20,6 +20,6 @@ class UserFollowerController extends Controller
     {
         $user = $request->user();
 
-        return $this->ok($user->followers);
+        return $this->ok($user->following);
     }
 }

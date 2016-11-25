@@ -37,11 +37,10 @@ class LoginController extends Controller
      */
     public function refreshToken(Request $request)
     {
-        $crypt = app()->make('encrypter');
         $request = app()->make('request');
 
         return $this->access('refresh_token', [
-            'refresh_token' => $crypt->decrypt($request->cookie('refresh_token'))
+            'refresh_token' => $request->cookie('refresh_token'),
         ]);
     }
 
@@ -60,13 +59,13 @@ class LoginController extends Controller
             $data = array_merge([
                 'client_id'     => $config->get('secrets.client_id'),
                 'client_secret' => $config->get('secrets.client_secret'),
-                'grant_type'    => $grantType
+                'grant_type'    => $grantType,
             ], $data);
 
             $http = new Client();
 
             $guzzleResponse = $http->post($config->get('app.url').'/oauth/token', [
-                'form_params' => $data
+                'form_params' => $data,
             ]);
         } catch(\GuzzleHttp\Exception\BadResponseException $e) {
             $guzzleResponse = $e->getResponse();
@@ -76,13 +75,9 @@ class LoginController extends Controller
 
         if (property_exists($response, "access_token")) {
             $cookie = app()->make('cookie');
-            $crypt  = app()->make('encrypter');
 
-            $encryptedToken = $crypt->encrypt($response->refresh_token);
-
-            // Set the refresh token as an encrypted HttpOnly cookie
             $cookie->queue('refresh_token',
-                $encryptedToken,
+                $response->refresh_token,
                 604800, // expiration, should be moved to a config file
                 null,
                 null,
@@ -107,5 +102,4 @@ class LoginController extends Controller
 
         return $response;
     }
-
 }
