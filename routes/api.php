@@ -14,7 +14,6 @@ use Illuminate\Http\Request;
 */
 
 $app->put('/user', function (Request $request) use ($app) {
-    dd($request->all());
     return response()->json($request->user());
 });
 
