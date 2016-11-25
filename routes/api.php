@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-$app->put('/user', function (Request $request) use ($app) {
+$app->get('/user', function (Request $request) use ($app) {
     return response()->json($request->user());
 });
 
