@@ -1,3 +1,8 @@
+!/public/images
+/public/images/*
+!/public/images/profile
+/public/images/profile/*
+!/public/images/profile/user-default.png
 /public/storage
 /storage/*.key
 /vendor
