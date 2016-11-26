@@ -17,4 +17,17 @@ class UserObserver
     {
         $user->user_status_id = UserStatus::ACTIVE;
     }
+
+    /**
+     * Listen to the User created event.
+     *
+     * @param  User $user
+     * @return void
+     */
+    public function created(User $user)
+    {
+        $permissions = require resource_path('roles/defaults.php');
+
+        $user->allow($permissions[get_class($user)]);
+    }
 }

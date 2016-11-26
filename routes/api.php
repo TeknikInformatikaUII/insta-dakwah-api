@@ -17,8 +17,8 @@ $app->get('/user', function (Request $request) use ($app) {
     return response()->json($request->user());
 });
 
-$app->get('/user-followers', 'Api\UserFollowerController@all');
-
+$app->get('/users/user-followers', 'Api\UserFollowerController@all');
+$app->get('/users/user-following', 'Api\UserFollowingController@all');
 rest('/users', 'UserController', 'Api');
 
 

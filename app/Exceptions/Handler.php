@@ -2,7 +2,9 @@
 
 namespace App\Exceptions;
 
+use Route;
 use Exception;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -45,6 +47,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+        if ($e instanceof AuthorizationException) {
+            return response('This action is unauthorized.', 403);
+        }
+
         return parent::render($request, $e);
     }
 }

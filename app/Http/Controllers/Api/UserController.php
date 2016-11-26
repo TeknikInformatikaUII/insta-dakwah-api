@@ -17,6 +17,8 @@ class UserController extends Controller
      */
     public function all()
     {
+        $this->authorize('users.view');
+
         return $this->ok(User::all());
     }
 

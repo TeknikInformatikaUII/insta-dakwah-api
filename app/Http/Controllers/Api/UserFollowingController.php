@@ -18,6 +18,8 @@ class UserFollowingController extends Controller
      */
     public function all(Request $request)
     {
+        $this->authorize('user_following.view');
+
         $user = $request->user();
 
         return $this->ok($user->following);

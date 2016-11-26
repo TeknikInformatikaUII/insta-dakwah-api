@@ -4,10 +4,14 @@ namespace App\Http\Controllers\Auth;
 
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use App\User;
 
 class LoginController extends Controller
 {
+    protected $errorMessage = 'The credentials not found in our database.';
+
     /**
      * Handle a login request to the application.
      *
@@ -25,6 +29,10 @@ class LoginController extends Controller
             'username' => $request->username,
             'password' => $request->password,
         ];
+
+        if (! $this->checkUser($this->credentials($request))) {
+            return $this->sendFailedLoginResponse();
+        }
 
         return $this->access('password', $credentials);
     }
@@ -101,5 +109,49 @@ class LoginController extends Controller
         }
 
         return $response;
+    }
+
+    /**
+     * Check the given user credentials.
+     *
+     * @return boolean
+     */
+    protected function checkUser($credentials)
+    {
+        $user = User::whereEmail($credentials['username'])->first();
+
+        if (! is_null($user) && Hash::check($credentials['password'], $user->password)) {
+            if ($user->isBanned()) {
+                $this->errorMessage = 'You have been banned from our services.';
+                return false;
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Get the failed login response instance.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    protected function sendFailedLoginResponse()
+    {
+        return response()->json([
+            'message' => $this->errorMessage,
+        ], 401);
+    }
+
+    /**
+     * Get the needed authorization credentials from the request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    protected function credentials(Request $request)
+    {
+        return $request->only('username', 'password');
     }
 }

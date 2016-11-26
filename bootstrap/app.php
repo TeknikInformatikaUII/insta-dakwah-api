@@ -31,19 +31,6 @@ $app->configure('auth');
 $app->configure('secrets');
 $app->configure('filesystems');
 
-
-/*
-|--------------------------------------------------------------------------
-| Register Class Aliases
-|--------------------------------------------------------------------------
-|
-| Now we will register a few class aliases.
-|
-*/
-
-class_alias(Illuminate\Support\Facades\Storage::class, 'Storage');
-class_alias(Silber\Bouncer\BouncerFacade::class, 'Bouncer');
-
 /*
 |--------------------------------------------------------------------------
 | Register Container Bindings
@@ -101,14 +88,27 @@ $app->routeMiddleware([
 |
 */
 
-$app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
-// $app->register(App\Providers\EventServiceProvider::class);
 $app->register(Illuminate\Filesystem\FilesystemServiceProvider::class);
 $app->register(Illuminate\Cookie\CookieServiceProvider::class);
 $app->register(Laravel\Passport\PassportServiceProvider::class);
 $app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
 $app->register(Silber\Bouncer\BouncerServiceProvider::class);
+
+$app->register(App\Providers\AppServiceProvider::class);
+// $app->register(App\Providers\AuthServiceProvider::class);
+// $app->register(App\Providers\EventServiceProvider::class);
+
+/*
+|--------------------------------------------------------------------------
+| Register Class Aliases
+|--------------------------------------------------------------------------
+|
+| Now we will register a few class aliases.
+|
+*/
+
+class_alias(Illuminate\Support\Facades\Storage::class, 'Storage');
+class_alias(Silber\Bouncer\BouncerFacade::class, 'Bouncer');
 
 /*
 |--------------------------------------------------------------------------
