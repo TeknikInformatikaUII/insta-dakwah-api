@@ -19,4 +19,5 @@ $app->get('/user', function (Request $request) use ($app) {
 
 $app->get('/users/user-followers', 'Api\UserFollowerController@all');
 $app->get('/users/user-following', 'Api\UserFollowingController@all');
+$app->post('/users/{user}/update-photo', 'Api\UserController@updatePhoto');
 rest('/users', 'UserController', 'user', 'Api');

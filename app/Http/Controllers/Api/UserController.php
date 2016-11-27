@@ -73,7 +73,7 @@ class UserController extends Controller
 
         $this->validate($request, [
             'name' => 'required',
-            'email' => 'required|email|max:255|unique:users,email,' . $id,
+            'email' => 'required|email|max:255|unique:users,email,' . $user->id,
             'password' => 'confirmed|min:6',
         ]);
 
@@ -82,6 +82,30 @@ class UserController extends Controller
                 'password' => bcrypt($request->password),
             ]);
         }
+
+        $user->update($request->all());
+
+        return $this->ok($user);
+    }
+
+    /**
+     * Update specific user photo in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function updatePhoto(Request $request, User $user)
+    {
+        $this->authorize('update-photo', $user);
+
+        $this->validate($request, [
+            'photo' => 'required',
+        ]);
+
+        $request->merge([
+            'photo_url' => $request->photo->store('images/profile', 'public'),
+        ]);
 
         $user->update($request->all());
 
