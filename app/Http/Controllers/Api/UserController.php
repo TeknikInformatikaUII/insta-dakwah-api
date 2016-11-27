@@ -25,16 +25,12 @@ class UserController extends Controller
     /**
      * Display specific user in storage.
      *
-     * @param  integer  $id
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function get($id)
+    public function get(User $user)
     {
-        $user = User::find($id);
-
-        if (is_null($user)) {
-            return $this->modelNotFound();
-        }
+        $this->authorize('view', $user);
 
         return $this->ok($user);
     }
@@ -47,6 +43,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('users.create');
+
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|max:255|unique:users',
@@ -66,22 +64,18 @@ class UserController extends Controller
      * Update specific user in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  integer  $id
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
+        $this->authorize('update', $user);
+
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|max:255|unique:users,email,' . $id,
             'password' => 'confirmed|min:6',
         ]);
-
-        $user = User::find($id);
-
-        if (is_null($user)) {
-            return $this->modelNotFound();
-        }
 
         if ($request->has('password')) {
             $request->merge([
@@ -97,16 +91,12 @@ class UserController extends Controller
     /**
      * Destroy specific user in storage.
      *
-     * @param  integer  $id
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        $user = User::find($id);
-
-        if (is_null($user)) {
-            return $this->modelNotFound();
-        }
+        $this->authorize('delete', $user);
 
         $user->delete();
 

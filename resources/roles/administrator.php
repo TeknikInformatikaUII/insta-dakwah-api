@@ -3,6 +3,7 @@
 return [
     'name' => 'Administrator',
     'permissions' => [
-        'users.view'
+        'users.view',
+        'users.create',
     ]
 ];
