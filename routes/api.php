@@ -19,22 +19,4 @@ $app->get('/user', function (Request $request) use ($app) {
 
 $app->get('/users/user-followers', 'Api\UserFollowerController@all');
 $app->get('/users/user-following', 'Api\UserFollowingController@all');
-rest('/users', 'UserController', 'Api');
-
-
-
-
-/*
- * Lumen RESTful Route.
- *
- */
-function rest($path, $controller, $namespace='')
-{
-    global $app;
-
-    $app->get($path, $namespace.'\\'.$controller.'@all');
-    $app->get($path.'/{id}', $namespace.'\\'.$controller.'@get');
-    $app->post($path, $namespace.'\\'.$controller.'@store');
-    $app->put($path.'/{id}', $namespace.'\\'.$controller.'@update');
-    $app->delete($path.'/{id}', $namespace.'\\'.$controller.'@destroy');
-}
+rest('/users', 'UserController', 'user', 'Api');
