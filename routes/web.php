@@ -20,5 +20,5 @@ $app->get('/', function () use ($app) {
 });
 
 
-$app->post('login', 'Auth\LoginController@login');
-$app->post('refresh-token', 'Auth\LoginController@refreshToken');
+$app->post('/login', 'Auth\LoginController@login');
+$app->post('/refresh-token', 'Auth\LoginController@refreshToken');
