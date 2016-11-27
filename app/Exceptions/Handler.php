@@ -47,8 +47,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        if ($e instanceof AuthorizationException) {
-            return response('This action is unauthorized.', 403);
+        switch (true) {
+            case $e instanceof AuthorizationException:
+                return response('This action is unauthorized.', 403);
+            case $e instanceof ModelNotFoundException:
+                return response('The model is not found.', 404);
         }
 
         return parent::render($request, $e);
